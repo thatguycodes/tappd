@@ -1,0 +1,8 @@
+[build]
+  base = "tappd-poc"
+  publish = "dist/tappd-poc/browser"
+  command = "ng build"
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
