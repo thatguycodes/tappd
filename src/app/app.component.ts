@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
   title = 'tappd-poc';
 
   name: string = '';
-  names: string[] = ['Sneakysquid', 'Lethobz', 'Rio Degenaro', 'Dalaflat', 'Marlon', 'Slick', 'MokoneGold', 'Lumbu', 'Pablitoo', 'Gixxer', 'DeadlierSirens', 'Nathi', 'Biggie', 'Mtimande', 'JayJunior', 'Sandile', 'Reymotor', 'cameron'];
+  names: string[] = ['Sneakysquid', 'Lethobz', 'Rio Degenaro', 'Dalaflat', 'Marlon', 'Slick', 'MokoneGold', 'Lumbu', 'Pablitoo', 'Gixxer', 'DeadlierSirens', 'Nathi', 'Biggie', 'Mtimande', 'JayJunior', 'Alpha predator', 'Reymotor', 'cameron'];
   teams: { id: number, members: string[] }[] = [];
 ngOnInit() {
   this.makeTeams();
