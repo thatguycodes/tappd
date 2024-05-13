@@ -40,8 +40,12 @@
 </div>-->
 <div class="card-container">
   <div class="card" *ngFor="let team of teams">
-    <h3>Team {{team.id}}</h3>
-    <div class="card__content" *ngFor="let member of team.members">{{member}}</div>
+    <mat-card>
+      <mat-card-header><h1>Team {{team.id}}</h1></mat-card-header>
+      <mat-card-content class="card__content" *ngFor="let member of team.members">{{member}}
+      </mat-card-content>
+    </mat-card>
+
   </div>
 </div>
 </div>
