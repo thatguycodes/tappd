@@ -12,3 +12,10 @@
   padding: 20px;
   box-sizing: border-box;
 }
+.pill {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #007bff; /* Blue color, you can change it */
+  color: #fff; /* White text, you can change it */
+  border-radius: 20px; /* Adjust as needed to get the desired pill shape */
+}
