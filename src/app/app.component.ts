@@ -1,24 +1,30 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import {FormsModule} from "@angular/forms";
 import {NgForOf} from "@angular/common";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
+import {MatList, MatListItem} from "@angular/material/list";
+import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
+import {MatGridList, MatGridTile} from "@angular/material/grid-list";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, FormsModule, NgForOf, MatToolbar, MatIcon, MatIconButton],
+  imports: [RouterOutlet, FormsModule, NgForOf, MatToolbar, MatIcon, MatIconButton, MatList, MatListItem, MatCard, MatCardContent, MatCardHeader, MatGridList, MatGridTile],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'tappd-poc';
 
   name: string = '';
-  names: string[] = [];
+  names: string[] = ['Sneakysquid', 'Lethobz', 'Rio Degenaro', 'Dalaflat', 'Marlon', 'Slick', 'MokoneGold', 'Lumbu', 'Pablitoo', 'Gixxer', 'DeadlierSirens', 'Nathi', 'Biggie', 'Mtimande', 'JayJunior', 'Sandile', 'Reymotor', 'cameron'];
   teams: { id: number, members: string[] }[] = [];
+ngOnInit() {
+  this.makeTeams();
+}
 
   addName() {
     if (this.name.trim() !== '') {

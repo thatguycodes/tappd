@@ -5,30 +5,33 @@
     </button>-->
     <span>Team Maker</span>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
+    <button (click)="makeTeams()" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon >shuffle</mat-icon>
     </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+  <!--  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
       <mat-icon>share</mat-icon>
-    </button>
+    </button>-->
   </mat-toolbar>
 
-
-  <label for="nameInput">Enter names:</label>
-  <input type="text" id="nameInput" [(ngModel)]="name" (keyup.enter)="addName()">
-  <button (click)="addName()">Add Name</button>
-  <button (click)="makeTeams()">Make Teams</button>
-  <hr>
   <br/>
-  <h3>List of Operators</h3>
-  <hr>
-  <div *ngFor="let ops of names">
-    <li>{{ops}}</li>
+  <br/>
+  <h3>Teams</h3>
+<!--  <div *ngFor="let team of teams">
+
+    <div class="card-container">
+      <div class="card">
+        <div class="card__header">Team {{team.id}}</div>
+        <div class="card__content" *ngFor="let member of team.members">{{member}}</div>
+      </div>
+    </div>
   </div>
-  <div *ngFor="let team of teams">
+
+
+</div>-->
+<div class="card-container">
+  <div class="card" *ngFor="let team of teams">
     <h3>Team {{team.id}}</h3>
-    <ul>
-      <li *ngFor="let member of team.members">{{member}}</li>
-    </ul>
+    <div class="card__content" *ngFor="let member of team.members">{{member}}</div>
   </div>
+</div>
 </div>
