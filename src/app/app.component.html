@@ -1,17 +1,19 @@
+<mat-toolbar [color]="'primary'">
+  <!--<button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
+  <mat-icon>menu</mat-icon>
+</button>-->
+  <span>Team Maker</span>
+  <span class="example-spacer"></span>
+<!--  <button (click)="makeTeams()" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon >shuffle</mat-icon>
+  </button>
+   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+  <mat-icon>add</mat-icon>
+</button>-->
+</mat-toolbar>
+<!--
 <div>
-  <mat-toolbar [color]="'primary'">
-   <!-- <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-      <mat-icon>menu</mat-icon>
-    </button>-->
-    <span>Team Maker</span>
-    <span class="example-spacer"></span>
-    <button (click)="makeTeams()" mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon >shuffle</mat-icon>
-    </button>
-  <!--  <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>-->
-  </mat-toolbar>
+
 
   <br/>
   <br/>
@@ -26,7 +28,7 @@
       <mat-icon>add</mat-icon>
     </button>
   </form>
-<!--  <div *ngFor="let team of teams">
+&lt;!&ndash;  <div *ngFor="let team of teams">
 
     <div class="card-container">
       <div class="card">
@@ -37,7 +39,7 @@
   </div>
 
 
-</div>-->
+</div>&ndash;&gt;
 <div class="card-container">
   <div class="card" *ngFor="let team of teams">
     <mat-card>
@@ -51,4 +53,11 @@
 </div>
 <div class="pill" *ngFor="let op of names">{{op}}</div>
 
+
+-->
+
+<mat-tab-group>
+  <mat-tab label="Teams"><app-teams-list></app-teams-list> </mat-tab>
+  <mat-tab label="Operators"><app-operator-list></app-operator-list></mat-tab>
+</mat-tab-group>
 

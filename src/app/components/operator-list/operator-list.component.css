@@ -1,0 +1,16 @@
+.mat-elevation-z8 {
+  position: relative;
+  margin: 0 auto;
+  width: 80%;
+}
+.example-flex-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: 10px auto;
+}
+.container{
+  width: 80%;
+  margin: 0 auto;
+}

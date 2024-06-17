@@ -19,26 +19,10 @@ import {
 } from "@angular/material/table";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
+import {MatTab, MatTabGroup} from "@angular/material/tabs";
+import {ELEMENT_DATA, OperatorListComponent} from "./components/operator-list/operator-list.component";
+import {TeamsListComponent} from "./components/teams-list/teams-list.component";
 
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -68,7 +52,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
     MatFormField,
     MatInput,
     MatFabButton,
-    MatLabel
+    MatLabel, MatTabGroup, MatTab, OperatorListComponent, TeamsListComponent
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
@@ -77,45 +61,20 @@ export class AppComponent implements OnInit {
   title = 'tappd-poc';
 
   name: string = '';
-  names: string[] = [];
+
   teams: { id: number, members: string[] }[] = [];
 
-  displayedColumns: string[] = ['name'];
-  dataSource = this.names;
-
 ngOnInit() {
-  this.makeTeams();
 }
 
-  addName() {
+/*  addName() {
     if (this.name.trim() !== '') {
       this.names.push(this.name);
       this.name = '';
     }
-  }
+  }*/
 
-  makeTeams() {
-    this.teams = [];
-    const shuffledNames = this.shuffle([...this.names]);
-    let teamId = 1;
-    while (shuffledNames.length > 0) {
-      const teamMembers = shuffledNames.splice(0, 3);
-      this.teams.push({ id: teamId++, members: teamMembers });
-    }
-  }
 
-  shuffle(array: any[]): any[] {
-    let currentIndex = array.length, temporaryValue, randomIndex;
 
-    while (0 !== currentIndex) {
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
 
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-  }
 }

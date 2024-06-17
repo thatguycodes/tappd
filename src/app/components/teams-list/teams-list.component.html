@@ -1,0 +1,10 @@
+<div class="example-flex-container">
+  <button mat-stroked-button disabled >Randomise teams (2)</button>
+  <button mat-stroked-button (click)="makeTeams(3)" >Randomise teams (3)</button>
+  <button mat-stroked-button [disabled]="true" >Randomise teams (4)</button>
+</div>
+
+<mat-grid-list cols="2" rowHeight="2:1" class="container" >
+  <mat-grid-tile *ngFor=" let name of teams"><app-list-tile [team]="name"></app-list-tile></mat-grid-tile>
+</mat-grid-list>
+
