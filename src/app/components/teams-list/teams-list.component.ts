@@ -5,6 +5,8 @@ import {NgForOf} from "@angular/common";
 import {ListTileComponent} from "./list-tile/list-tile.component";
 import {StorageService} from "../../services/storage.service";
 import { MatCardModule} from "@angular/material/card";
+import {TeamDirective} from "./team.directive";
+import {TeamPipe} from "./team.pipe";
 
 @Component({
   selector: 'app-teams-list',
@@ -15,7 +17,9 @@ import { MatCardModule} from "@angular/material/card";
     MatButton,
     NgForOf,
     ListTileComponent,
-    MatCardModule
+    MatCardModule,
+    TeamDirective,
+    TeamPipe
   ],
   templateUrl: './teams-list.component.html',
   styleUrl: './teams-list.component.css'
@@ -23,7 +27,8 @@ import { MatCardModule} from "@angular/material/card";
 export class TeamsListComponent  implements OnInit {
 
   names: string[] = [];
-  teams: { id: number, members: string[] }[] = [];
+  teams: { id: number, members: string[], team?: string }[] = [];
+   operators: any;
 
   constructor(private storage: StorageService) {
   }
@@ -34,7 +39,7 @@ export class TeamsListComponent  implements OnInit {
         if (operators.length > 0) {
           this.names = operators.map((operator: { name: any; }) => operator.name);
           this.teams = this.createTeams(operators)
-          console.log(this.teams)
+          this.operators = operators;
         }
 
       },
@@ -85,7 +90,8 @@ export class TeamsListComponent  implements OnInit {
     const result = Object.keys(groups).map(key => {
       return {
         id: idCounter++,
-        members: groups[key].map((op: { name: any; }) => op.name)
+        members: groups[key].map((op: { name: any; }) => op.name),
+        team: groups[key].map((op: { team: any; }) => op.team)[0]
       };
     });
 
