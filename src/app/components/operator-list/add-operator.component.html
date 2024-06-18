@@ -1,0 +1,17 @@
+
+<mat-dialog-content>
+  <p>Add a new operator</p>
+  <mat-form-field>
+    <mat-label>Operator name</mat-label>
+    <input matInput [(ngModel)]="data.name" />
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-label>Team name</mat-label>
+    <input matInput [(ngModel)]="data.team" />
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Ok</button>
+</mat-dialog-actions>

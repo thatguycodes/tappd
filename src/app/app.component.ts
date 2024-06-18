@@ -20,7 +20,7 @@ import {
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
-import {ELEMENT_DATA, OperatorListComponent} from "./components/operator-list/operator-list.component";
+import {OperatorListComponent} from "./components/operator-list/operator-list.component";
 import {TeamsListComponent} from "./components/teams-list/teams-list.component";
 
 @Component({
@@ -52,7 +52,7 @@ import {TeamsListComponent} from "./components/teams-list/teams-list.component";
     MatFormField,
     MatInput,
     MatFabButton,
-    MatLabel, MatTabGroup, MatTab, OperatorListComponent, TeamsListComponent
+    MatLabel, MatTabGroup, MatTab, OperatorListComponent, TeamsListComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

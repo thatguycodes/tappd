@@ -1,41 +1,122 @@
-import {Component, ViewEncapsulation} from '@angular/core';
 import {
- MatTableModule
+  ChangeDetectionStrategy,
+  Component,
+  Inject,
+  inject,
+  model,
+  OnInit,
+  signal,
+  ViewEncapsulation
+} from '@angular/core';
+import {
+  MatTableDataSource,
+  MatTableModule
 } from "@angular/material/table";
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatButtonModule} from "@angular/material/button";
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogActions, MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle
+} from "@angular/material/dialog";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatInputModule} from "@angular/material/input";
+import {FormsModule} from "@angular/forms";
+import {StorageService} from "../../services/storage.service";
+import {HttpClientModule} from "@angular/common/http";
+import {CommonModule} from "@angular/common";
 
-export interface PeriodicElement {
+export interface Operator {
   name: string;
-  position: number;
+  team: string;
 }
 
-export const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Alpha Predator'},
-  {position: 2, name: 'ReyMontor'},
-  {position: 3, name: 'I8urMama'},
-  {position: 4, name: 'Dalaflat'},
-  {position: 5, name: 'DeadlierSirens'},
-  {position: 6, name: 'Lethobz'},
-  {position: 7, name: 'Marlon'},
-  {position: 8, name: 'Pablito'},
-  {position: 9, name: 'Cameron'},
-  {position: 10, name: 'Kat_TheGreat'},
-  {position: 11, name: 'Lumbu01'},
-  {position: 12, name: 'Pocked-Cargo'},
-];
+export interface DialogData {
+  team: string;
+  name: string;
+}
+
 
 @Component({
   selector: 'app-operator-list',
   standalone: true,
   imports: [
     MatTableModule,
-    MatButton
+    MatButton,
+    HttpClientModule,
+    CommonModule
   ],
   templateUrl: './operator-list.component.html',
   styleUrl: './operator-list.component.css',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OperatorListComponent {
-  displayedColumns: string[] = ['position', 'name'];
-  dataSource = ELEMENT_DATA;
+export class OperatorListComponent implements OnInit {
+  displayedColumns: string[] = [ 'name', 'team'];
+  dataSource = new MatTableDataSource<any>();
+  team = signal('');
+  readonly name = signal('');
+  readonly dialog = inject(MatDialog);
+constructor(private storage: StorageService) {
+}
+  addOperator() {
+    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+      data: {name: this.name(), team: this.team()},
+    });
+
+    dialogRef.afterClosed().subscribe(operator => {
+      if (operator !== undefined) {
+        this.storage.addOperator(operator).subscribe({
+          next: (res) => {
+            if (res) {
+              alert('Operator added successfully')
+            }
+          },
+          error: (error) => {
+          alert('Operator was not added, try again later!' + error)
+          }
+      })
+    }});
+  }
+
+  ngOnInit(): void {
+  this.storage.listOperators().subscribe({
+    next: (operators) => {
+      if (operators) {
+        this.dataSource.data = operators;
+      }
+    },
+    error: (error) => {
+      console.error(error)
+    }
+  });
+
+  }
+}
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: 'add-operator.component.html',
+  standalone: true,
+  imports: [
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    MatButtonModule,
+    MatDialogTitle,
+    MatDialogContent,
+    MatDialogActions,
+    MatDialogClose,
+  ],
+})
+export class DialogOverviewExampleDialog {
+  readonly dialogRef = inject(MatDialogRef<DialogOverviewExampleDialog>);
+  data = inject<DialogData>(MAT_DIALOG_DATA);
+  team = model(this.data.team);
+  name = model(this.data.name)
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }
